@@ -52,6 +52,7 @@ import { Route as AuthenticatedSpeakersIdRouteImport } from './routes/_authentic
 import { Route as AuthenticatedMentorAssignmentsIndexRouteImport } from './routes/_authenticated/mentor.assignments.index'
 import { Route as AuthenticatedMentorAssignmentsIdRouteImport } from './routes/_authenticated/mentor.assignments.$id'
 import { Route as AuthenticatedReportsHoldingsIndexRouteImport } from './routes/_authenticated/reports.holdings.index'
+import { Route as AuthenticatedReportsHoldingsIdRouteImport } from './routes/_authenticated/reports.holdings.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -290,6 +291,12 @@ const AuthenticatedReportsHoldingsIndexRoute =
     path: '/reports/holdings/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedReportsHoldingsIdRoute =
+  AuthenticatedReportsHoldingsIdRouteImport.update({
+    id: '/reports/holdings/$id',
+    path: '/reports/holdings/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/speakers/': typeof AuthenticatedSpeakersIndexRoute
   '/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/mentor/assignments/': typeof AuthenticatedMentorAssignmentsIndexRoute
   '/reports/holdings/': typeof AuthenticatedReportsHoldingsIndexRoute
 }
@@ -376,6 +384,7 @@ export interface FileRoutesByTo {
   '/meetings': typeof AuthenticatedMeetingsIndexRoute
   '/speakers': typeof AuthenticatedSpeakersIndexRoute
   '/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/mentor/assignments': typeof AuthenticatedMentorAssignmentsIndexRoute
   '/reports/holdings': typeof AuthenticatedReportsHoldingsIndexRoute
 }
@@ -422,6 +431,7 @@ export interface FileRoutesById {
   '/_authenticated/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/_authenticated/speakers/': typeof AuthenticatedSpeakersIndexRoute
   '/_authenticated/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/_authenticated/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/_authenticated/mentor/assignments/': typeof AuthenticatedMentorAssignmentsIndexRoute
   '/_authenticated/reports/holdings/': typeof AuthenticatedReportsHoldingsIndexRoute
 }
@@ -468,6 +478,7 @@ export interface FileRouteTypes {
     | '/meetings/'
     | '/speakers/'
     | '/mentor/assignments/$id'
+    | '/reports/holdings/$id'
     | '/mentor/assignments/'
     | '/reports/holdings/'
   fileRoutesByTo: FileRoutesByTo
@@ -512,6 +523,7 @@ export interface FileRouteTypes {
     | '/meetings'
     | '/speakers'
     | '/mentor/assignments/$id'
+    | '/reports/holdings/$id'
     | '/mentor/assignments'
     | '/reports/holdings'
   id:
@@ -557,6 +569,7 @@ export interface FileRouteTypes {
     | '/_authenticated/meetings/'
     | '/_authenticated/speakers/'
     | '/_authenticated/mentor/assignments/$id'
+    | '/_authenticated/reports/holdings/$id'
     | '/_authenticated/mentor/assignments/'
     | '/_authenticated/reports/holdings/'
   fileRoutesById: FileRoutesById
@@ -873,6 +886,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsHoldingsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports/holdings/$id': {
+      id: '/_authenticated/reports/holdings/$id'
+      path: '/reports/holdings/$id'
+      fullPath: '/reports/holdings/$id'
+      preLoaderRoute: typeof AuthenticatedReportsHoldingsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -912,6 +932,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMeetingsIndexRoute: typeof AuthenticatedMeetingsIndexRoute
   AuthenticatedSpeakersIndexRoute: typeof AuthenticatedSpeakersIndexRoute
   AuthenticatedMentorAssignmentsIdRoute: typeof AuthenticatedMentorAssignmentsIdRoute
+  AuthenticatedReportsHoldingsIdRoute: typeof AuthenticatedReportsHoldingsIdRoute
   AuthenticatedMentorAssignmentsIndexRoute: typeof AuthenticatedMentorAssignmentsIndexRoute
   AuthenticatedReportsHoldingsIndexRoute: typeof AuthenticatedReportsHoldingsIndexRoute
 }
@@ -953,6 +974,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMeetingsIndexRoute: AuthenticatedMeetingsIndexRoute,
   AuthenticatedSpeakersIndexRoute: AuthenticatedSpeakersIndexRoute,
   AuthenticatedMentorAssignmentsIdRoute: AuthenticatedMentorAssignmentsIdRoute,
+  AuthenticatedReportsHoldingsIdRoute: AuthenticatedReportsHoldingsIdRoute,
   AuthenticatedMentorAssignmentsIndexRoute:
     AuthenticatedMentorAssignmentsIndexRoute,
   AuthenticatedReportsHoldingsIndexRoute:
