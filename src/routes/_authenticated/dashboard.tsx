@@ -109,6 +109,25 @@ function DashboardPage() {
         </Link>
       )}
 
+      {unreadCoaching > 0 && (
+        <Link
+          to="/coaching"
+          className="block rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent/40"
+        >
+          Ada {unreadCoaching} catatan bimbingan yang belum kamu baca. Klik untuk membukanya.
+        </Link>
+      )}
+
+      {weeklyContributions > 0 && (
+        <Link
+          to="/contributions"
+          className="block rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-900 shadow-sm transition-colors hover:bg-emerald-100"
+        >
+          Minggu ini kamu mendapat {weeklyContributions} apresiasi dari rekan. Terima kasih sudah
+          hadir untuk tim.
+        </Link>
+      )}
+
       {isSupervisor(profile?.role) && <SupervisorOverview />}
 
       <section className="rounded-2xl bg-primary p-6 text-primary-foreground shadow-sm sm:p-8">
