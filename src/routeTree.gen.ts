@@ -19,7 +19,9 @@ import { Route as AuthenticatedAnnouncementsRouteImport } from './routes/_authen
 import { Route as AuthenticatedBudgetsRouteImport } from './routes/_authenticated/budgets'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
 import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/cash'
+import { Route as AuthenticatedCoachingRouteImport } from './routes/_authenticated/coaching'
 import { Route as AuthenticatedCommandCenterRouteImport } from './routes/_authenticated/command-center'
+import { Route as AuthenticatedContributionsRouteImport } from './routes/_authenticated/contributions'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDivisionsRouteImport } from './routes/_authenticated/divisions'
 import { Route as AuthenticatedFundApprovalsRouteImport } from './routes/_authenticated/fund-approvals'
@@ -43,11 +45,16 @@ import { Route as AuthenticatedFundRequestsIndexRouteImport } from './routes/_au
 import { Route as AuthenticatedFundRequestsIdRouteImport } from './routes/_authenticated/fund-requests.$id'
 import { Route as AuthenticatedMeetingsIndexRouteImport } from './routes/_authenticated/meetings.index'
 import { Route as AuthenticatedMeetingsIdRouteImport } from './routes/_authenticated/meetings.$id'
+import { Route as AuthenticatedReportsBlockersRouteImport } from './routes/_authenticated/reports.blockers'
+import { Route as AuthenticatedReportsMemberRouteImport } from './routes/_authenticated/reports.member'
+import { Route as AuthenticatedReportsWorkloadRouteImport } from './routes/_authenticated/reports.workload'
 import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
 import { Route as AuthenticatedSpeakersIndexRouteImport } from './routes/_authenticated/speakers.index'
 import { Route as AuthenticatedSpeakersIdRouteImport } from './routes/_authenticated/speakers.$id'
 import { Route as AuthenticatedMentorAssignmentsIndexRouteImport } from './routes/_authenticated/mentor.assignments.index'
 import { Route as AuthenticatedMentorAssignmentsIdRouteImport } from './routes/_authenticated/mentor.assignments.$id'
+import { Route as AuthenticatedReportsHoldingsIndexRouteImport } from './routes/_authenticated/reports.holdings.index'
+import { Route as AuthenticatedReportsHoldingsIdRouteImport } from './routes/_authenticated/reports.holdings.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -99,10 +106,21 @@ const AuthenticatedCashRoute = AuthenticatedCashRouteImport.update({
   path: '/cash',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCoachingRoute = AuthenticatedCoachingRouteImport.update({
+  id: '/coaching',
+  path: '/coaching',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCommandCenterRoute =
   AuthenticatedCommandCenterRouteImport.update({
     id: '/command-center',
     path: '/command-center',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedContributionsRoute =
+  AuthenticatedContributionsRouteImport.update({
+    id: '/contributions',
+    path: '/contributions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -233,6 +251,24 @@ const AuthenticatedMeetingsIdRoute = AuthenticatedMeetingsIdRouteImport.update({
   path: '/meetings/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedReportsBlockersRoute =
+  AuthenticatedReportsBlockersRouteImport.update({
+    id: '/reports/blockers',
+    path: '/reports/blockers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedReportsMemberRoute =
+  AuthenticatedReportsMemberRouteImport.update({
+    id: '/reports/member',
+    path: '/reports/member',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedReportsWorkloadRoute =
+  AuthenticatedReportsWorkloadRouteImport.update({
+    id: '/reports/workload',
+    path: '/reports/workload',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsOrganizationRoute =
   AuthenticatedSettingsOrganizationRouteImport.update({
     id: '/settings/organization',
@@ -262,6 +298,18 @@ const AuthenticatedMentorAssignmentsIdRoute =
     path: '/mentor/assignments/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedReportsHoldingsIndexRoute =
+  AuthenticatedReportsHoldingsIndexRouteImport.update({
+    id: '/reports/holdings/',
+    path: '/reports/holdings/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedReportsHoldingsIdRoute =
+  AuthenticatedReportsHoldingsIdRouteImport.update({
+    id: '/reports/holdings/$id',
+    path: '/reports/holdings/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -273,7 +321,9 @@ export interface FileRoutesByFullPath {
   '/budgets': typeof AuthenticatedBudgetsRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/cash': typeof AuthenticatedCashRoute
+  '/coaching': typeof AuthenticatedCoachingRoute
   '/command-center': typeof AuthenticatedCommandCenterRoute
+  '/contributions': typeof AuthenticatedContributionsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/divisions': typeof AuthenticatedDivisionsRoute
   '/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -293,6 +343,9 @@ export interface FileRoutesByFullPath {
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/reports/blockers': typeof AuthenticatedReportsBlockersRoute
+  '/reports/member': typeof AuthenticatedReportsMemberRoute
+  '/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/speakers/$id': typeof AuthenticatedSpeakersIdRoute
   '/companies/': typeof AuthenticatedCompaniesIndexRoute
@@ -301,7 +354,9 @@ export interface FileRoutesByFullPath {
   '/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/speakers/': typeof AuthenticatedSpeakersIndexRoute
   '/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/mentor/assignments/': typeof AuthenticatedMentorAssignmentsIndexRoute
+  '/reports/holdings/': typeof AuthenticatedReportsHoldingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -313,7 +368,9 @@ export interface FileRoutesByTo {
   '/budgets': typeof AuthenticatedBudgetsRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/cash': typeof AuthenticatedCashRoute
+  '/coaching': typeof AuthenticatedCoachingRoute
   '/command-center': typeof AuthenticatedCommandCenterRoute
+  '/contributions': typeof AuthenticatedContributionsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/divisions': typeof AuthenticatedDivisionsRoute
   '/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -333,6 +390,9 @@ export interface FileRoutesByTo {
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/reports/blockers': typeof AuthenticatedReportsBlockersRoute
+  '/reports/member': typeof AuthenticatedReportsMemberRoute
+  '/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/speakers/$id': typeof AuthenticatedSpeakersIdRoute
   '/companies': typeof AuthenticatedCompaniesIndexRoute
@@ -341,7 +401,9 @@ export interface FileRoutesByTo {
   '/meetings': typeof AuthenticatedMeetingsIndexRoute
   '/speakers': typeof AuthenticatedSpeakersIndexRoute
   '/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/mentor/assignments': typeof AuthenticatedMentorAssignmentsIndexRoute
+  '/reports/holdings': typeof AuthenticatedReportsHoldingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -355,7 +417,9 @@ export interface FileRoutesById {
   '/_authenticated/budgets': typeof AuthenticatedBudgetsRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/cash': typeof AuthenticatedCashRoute
+  '/_authenticated/coaching': typeof AuthenticatedCoachingRoute
   '/_authenticated/command-center': typeof AuthenticatedCommandCenterRoute
+  '/_authenticated/contributions': typeof AuthenticatedContributionsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/divisions': typeof AuthenticatedDivisionsRoute
   '/_authenticated/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -375,6 +439,9 @@ export interface FileRoutesById {
   '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
   '/_authenticated/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/_authenticated/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/_authenticated/reports/blockers': typeof AuthenticatedReportsBlockersRoute
+  '/_authenticated/reports/member': typeof AuthenticatedReportsMemberRoute
+  '/_authenticated/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/_authenticated/speakers/$id': typeof AuthenticatedSpeakersIdRoute
   '/_authenticated/companies/': typeof AuthenticatedCompaniesIndexRoute
@@ -383,7 +450,9 @@ export interface FileRoutesById {
   '/_authenticated/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/_authenticated/speakers/': typeof AuthenticatedSpeakersIndexRoute
   '/_authenticated/mentor/assignments/$id': typeof AuthenticatedMentorAssignmentsIdRoute
+  '/_authenticated/reports/holdings/$id': typeof AuthenticatedReportsHoldingsIdRoute
   '/_authenticated/mentor/assignments/': typeof AuthenticatedMentorAssignmentsIndexRoute
+  '/_authenticated/reports/holdings/': typeof AuthenticatedReportsHoldingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -397,7 +466,9 @@ export interface FileRouteTypes {
     | '/budgets'
     | '/calendar'
     | '/cash'
+    | '/coaching'
     | '/command-center'
+    | '/contributions'
     | '/dashboard'
     | '/divisions'
     | '/fund-approvals'
@@ -417,6 +488,9 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/fund-requests/$id'
     | '/meetings/$id'
+    | '/reports/blockers'
+    | '/reports/member'
+    | '/reports/workload'
     | '/settings/organization'
     | '/speakers/$id'
     | '/companies/'
@@ -425,7 +499,9 @@ export interface FileRouteTypes {
     | '/meetings/'
     | '/speakers/'
     | '/mentor/assignments/$id'
+    | '/reports/holdings/$id'
     | '/mentor/assignments/'
+    | '/reports/holdings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -437,7 +513,9 @@ export interface FileRouteTypes {
     | '/budgets'
     | '/calendar'
     | '/cash'
+    | '/coaching'
     | '/command-center'
+    | '/contributions'
     | '/dashboard'
     | '/divisions'
     | '/fund-approvals'
@@ -457,6 +535,9 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/fund-requests/$id'
     | '/meetings/$id'
+    | '/reports/blockers'
+    | '/reports/member'
+    | '/reports/workload'
     | '/settings/organization'
     | '/speakers/$id'
     | '/companies'
@@ -465,7 +546,9 @@ export interface FileRouteTypes {
     | '/meetings'
     | '/speakers'
     | '/mentor/assignments/$id'
+    | '/reports/holdings/$id'
     | '/mentor/assignments'
+    | '/reports/holdings'
   id:
     | '__root__'
     | '/'
@@ -478,7 +561,9 @@ export interface FileRouteTypes {
     | '/_authenticated/budgets'
     | '/_authenticated/calendar'
     | '/_authenticated/cash'
+    | '/_authenticated/coaching'
     | '/_authenticated/command-center'
+    | '/_authenticated/contributions'
     | '/_authenticated/dashboard'
     | '/_authenticated/divisions'
     | '/_authenticated/fund-approvals'
@@ -498,6 +583,9 @@ export interface FileRouteTypes {
     | '/_authenticated/events/$id'
     | '/_authenticated/fund-requests/$id'
     | '/_authenticated/meetings/$id'
+    | '/_authenticated/reports/blockers'
+    | '/_authenticated/reports/member'
+    | '/_authenticated/reports/workload'
     | '/_authenticated/settings/organization'
     | '/_authenticated/speakers/$id'
     | '/_authenticated/companies/'
@@ -506,7 +594,9 @@ export interface FileRouteTypes {
     | '/_authenticated/meetings/'
     | '/_authenticated/speakers/'
     | '/_authenticated/mentor/assignments/$id'
+    | '/_authenticated/reports/holdings/$id'
     | '/_authenticated/mentor/assignments/'
+    | '/_authenticated/reports/holdings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -590,11 +680,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCashRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/coaching': {
+      id: '/_authenticated/coaching'
+      path: '/coaching'
+      fullPath: '/coaching'
+      preLoaderRoute: typeof AuthenticatedCoachingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/command-center': {
       id: '/_authenticated/command-center'
       path: '/command-center'
       fullPath: '/command-center'
       preLoaderRoute: typeof AuthenticatedCommandCenterRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/contributions': {
+      id: '/_authenticated/contributions'
+      path: '/contributions'
+      fullPath: '/contributions'
+      preLoaderRoute: typeof AuthenticatedContributionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -758,6 +862,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMeetingsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports/blockers': {
+      id: '/_authenticated/reports/blockers'
+      path: '/reports/blockers'
+      fullPath: '/reports/blockers'
+      preLoaderRoute: typeof AuthenticatedReportsBlockersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports/member': {
+      id: '/_authenticated/reports/member'
+      path: '/reports/member'
+      fullPath: '/reports/member'
+      preLoaderRoute: typeof AuthenticatedReportsMemberRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports/workload': {
+      id: '/_authenticated/reports/workload'
+      path: '/reports/workload'
+      fullPath: '/reports/workload'
+      preLoaderRoute: typeof AuthenticatedReportsWorkloadRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/organization': {
       id: '/_authenticated/settings/organization'
       path: '/settings/organization'
@@ -793,6 +918,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMentorAssignmentsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports/holdings/': {
+      id: '/_authenticated/reports/holdings/'
+      path: '/reports/holdings'
+      fullPath: '/reports/holdings/'
+      preLoaderRoute: typeof AuthenticatedReportsHoldingsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports/holdings/$id': {
+      id: '/_authenticated/reports/holdings/$id'
+      path: '/reports/holdings/$id'
+      fullPath: '/reports/holdings/$id'
+      preLoaderRoute: typeof AuthenticatedReportsHoldingsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -801,7 +940,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBudgetsRoute: typeof AuthenticatedBudgetsRoute
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCashRoute: typeof AuthenticatedCashRoute
+  AuthenticatedCoachingRoute: typeof AuthenticatedCoachingRoute
   AuthenticatedCommandCenterRoute: typeof AuthenticatedCommandCenterRoute
+  AuthenticatedContributionsRoute: typeof AuthenticatedContributionsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDivisionsRoute: typeof AuthenticatedDivisionsRoute
   AuthenticatedFundApprovalsRoute: typeof AuthenticatedFundApprovalsRoute
@@ -821,6 +962,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedEventsIdRoute: typeof AuthenticatedEventsIdRoute
   AuthenticatedFundRequestsIdRoute: typeof AuthenticatedFundRequestsIdRoute
   AuthenticatedMeetingsIdRoute: typeof AuthenticatedMeetingsIdRoute
+  AuthenticatedReportsBlockersRoute: typeof AuthenticatedReportsBlockersRoute
+  AuthenticatedReportsMemberRoute: typeof AuthenticatedReportsMemberRoute
+  AuthenticatedReportsWorkloadRoute: typeof AuthenticatedReportsWorkloadRoute
   AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
   AuthenticatedSpeakersIdRoute: typeof AuthenticatedSpeakersIdRoute
   AuthenticatedCompaniesIndexRoute: typeof AuthenticatedCompaniesIndexRoute
@@ -829,7 +973,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMeetingsIndexRoute: typeof AuthenticatedMeetingsIndexRoute
   AuthenticatedSpeakersIndexRoute: typeof AuthenticatedSpeakersIndexRoute
   AuthenticatedMentorAssignmentsIdRoute: typeof AuthenticatedMentorAssignmentsIdRoute
+  AuthenticatedReportsHoldingsIdRoute: typeof AuthenticatedReportsHoldingsIdRoute
   AuthenticatedMentorAssignmentsIndexRoute: typeof AuthenticatedMentorAssignmentsIndexRoute
+  AuthenticatedReportsHoldingsIndexRoute: typeof AuthenticatedReportsHoldingsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -837,7 +983,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBudgetsRoute: AuthenticatedBudgetsRoute,
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedCashRoute: AuthenticatedCashRoute,
+  AuthenticatedCoachingRoute: AuthenticatedCoachingRoute,
   AuthenticatedCommandCenterRoute: AuthenticatedCommandCenterRoute,
+  AuthenticatedContributionsRoute: AuthenticatedContributionsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDivisionsRoute: AuthenticatedDivisionsRoute,
   AuthenticatedFundApprovalsRoute: AuthenticatedFundApprovalsRoute,
@@ -857,6 +1005,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedEventsIdRoute: AuthenticatedEventsIdRoute,
   AuthenticatedFundRequestsIdRoute: AuthenticatedFundRequestsIdRoute,
   AuthenticatedMeetingsIdRoute: AuthenticatedMeetingsIdRoute,
+  AuthenticatedReportsBlockersRoute: AuthenticatedReportsBlockersRoute,
+  AuthenticatedReportsMemberRoute: AuthenticatedReportsMemberRoute,
+  AuthenticatedReportsWorkloadRoute: AuthenticatedReportsWorkloadRoute,
   AuthenticatedSettingsOrganizationRoute:
     AuthenticatedSettingsOrganizationRoute,
   AuthenticatedSpeakersIdRoute: AuthenticatedSpeakersIdRoute,
@@ -866,8 +1017,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMeetingsIndexRoute: AuthenticatedMeetingsIndexRoute,
   AuthenticatedSpeakersIndexRoute: AuthenticatedSpeakersIndexRoute,
   AuthenticatedMentorAssignmentsIdRoute: AuthenticatedMentorAssignmentsIdRoute,
+  AuthenticatedReportsHoldingsIdRoute: AuthenticatedReportsHoldingsIdRoute,
   AuthenticatedMentorAssignmentsIndexRoute:
     AuthenticatedMentorAssignmentsIndexRoute,
+  AuthenticatedReportsHoldingsIndexRoute:
+    AuthenticatedReportsHoldingsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

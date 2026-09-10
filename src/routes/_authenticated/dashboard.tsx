@@ -10,6 +10,7 @@ import { canManageCash, fetchMyBills, fetchPendingClaims } from "@/lib/cash";
 import { SupervisorOverview } from "@/components/assignments/SupervisorOverview";
 import { UrgentBanners } from "@/components/announcements/UrgentBanners";
 import { WelcomeGuideCard } from "@/components/WelcomeGuideCard";
+import { countContributionsThisWeek, countUnacknowledgedCoaching } from "@/lib/hr";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -67,6 +68,17 @@ function DashboardPage() {
     (b) => b.status === "Belum_Bayar" || b.status === "Ditolak",
   ).length;
 
+  const { data: unreadCoaching = 0 } = useQuery({
+    queryKey: ["coaching-unread", profile?.id],
+    queryFn: () => countUnacknowledgedCoaching(profile!.id),
+    enabled: !!profile?.id,
+  });
+  const { data: weeklyContributions = 0 } = useQuery({
+    queryKey: ["contributions-week", profile?.id],
+    queryFn: () => countContributionsThisWeek(profile!.id),
+    enabled: !!profile?.id,
+  });
+
   const activeEvents = events.filter((e) =>
     ["Planning", "Preparation", "Live"].includes(e.status ?? ""),
   );
@@ -106,6 +118,25 @@ function DashboardPage() {
           className="block rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent/40"
         >
           Klaim menunggu verifikasi: <span className="font-semibold">{pendingClaims.length}</span>
+        </Link>
+      )}
+
+      {unreadCoaching > 0 && (
+        <Link
+          to="/coaching"
+          className="block rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent/40"
+        >
+          Ada {unreadCoaching} catatan bimbingan yang belum kamu baca. Klik untuk membukanya.
+        </Link>
+      )}
+
+      {weeklyContributions > 0 && (
+        <Link
+          to="/contributions"
+          className="block rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-900 shadow-sm transition-colors hover:bg-emerald-100"
+        >
+          Minggu ini kamu mendapat {weeklyContributions} apresiasi dari rekan. Terima kasih sudah
+          hadir untuk tim.
         </Link>
       )}
 

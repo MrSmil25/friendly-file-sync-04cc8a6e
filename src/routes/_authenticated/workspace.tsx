@@ -15,6 +15,8 @@ import {
   type NewTaskInput,
   type TaskStatus,
 } from "@/lib/workspace";
+import { setTaskBlocked } from "@/lib/hr";
+import { BlockedTaskDialog } from "@/components/hr/BlockedTaskDialog";
 import { KanbanBoard } from "@/components/workspace/KanbanBoard";
 import { TaskFormDialog } from "@/components/workspace/TaskFormDialog";
 import { MyReimbursementNotice } from "@/components/fund-requests/MyReimbursementNotice";
@@ -76,6 +78,7 @@ function WorkspacePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const [showPrivate, setShowPrivate] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
+  const [blockTarget, setBlockTarget] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
@@ -98,6 +101,25 @@ function WorkspacePage() {
       updateTaskStatus(id, status),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["my-workspace"] }),
     onError: (e: Error) => toast.error(e.message || "Gagal memindahkan task."),
+  });
+
+  const blockMutation = useMutation({
+    mutationFn: ({
+      id,
+      blockedBy,
+      reason,
+    }: {
+      id: string;
+      blockedBy: string | null;
+      reason: string;
+    }) => setTaskBlocked(id, blockedBy, reason),
+    onSuccess: () => {
+      toast.success("Task ditandai terhambat.");
+      setBlockTarget(null);
+      queryClient.invalidateQueries({ queryKey: ["my-workspace"] });
+      queryClient.invalidateQueries({ queryKey: ["blocker-summary"] });
+    },
+    onError: (e: Error) => toast.error(e.message || "Gagal menandai task terhambat."),
   });
 
   const createMutation = useMutation({
@@ -184,6 +206,10 @@ function WorkspacePage() {
             onMove={(id, status) => {
               const task = tasks.find((t) => t.id === id);
               if (!task || task.status === status) return;
+              if (status === "Blocked") {
+                setBlockTarget({ id, title: task.title });
+                return;
+              }
               moveMutation.mutate({ id, status });
             }}
           />
@@ -256,6 +282,16 @@ function WorkspacePage() {
         options={options}
         saving={createMutation.isPending}
         onSubmit={(values) => createMutation.mutate(values)}
+      />
+
+      <BlockedTaskDialog
+        open={!!blockTarget}
+        taskTitle={blockTarget?.title}
+        onOpenChange={(o) => !o && setBlockTarget(null)}
+        submitting={blockMutation.isPending}
+        onSubmit={({ blockedBy, reason }) =>
+          blockTarget && blockMutation.mutate({ id: blockTarget.id, blockedBy, reason })
+        }
       />
     </div>
   );
