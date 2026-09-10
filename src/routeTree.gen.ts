@@ -43,6 +43,7 @@ import { Route as AuthenticatedFundRequestsIndexRouteImport } from './routes/_au
 import { Route as AuthenticatedFundRequestsIdRouteImport } from './routes/_authenticated/fund-requests.$id'
 import { Route as AuthenticatedMeetingsIndexRouteImport } from './routes/_authenticated/meetings.index'
 import { Route as AuthenticatedMeetingsIdRouteImport } from './routes/_authenticated/meetings.$id'
+import { Route as AuthenticatedReportsBlockersRouteImport } from './routes/_authenticated/reports.blockers'
 import { Route as AuthenticatedReportsMemberRouteImport } from './routes/_authenticated/reports.member'
 import { Route as AuthenticatedReportsWorkloadRouteImport } from './routes/_authenticated/reports.workload'
 import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
@@ -235,6 +236,12 @@ const AuthenticatedMeetingsIdRoute = AuthenticatedMeetingsIdRouteImport.update({
   path: '/meetings/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedReportsBlockersRoute =
+  AuthenticatedReportsBlockersRouteImport.update({
+    id: '/reports/blockers',
+    path: '/reports/blockers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedReportsMemberRoute =
   AuthenticatedReportsMemberRouteImport.update({
     id: '/reports/member',
@@ -307,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/reports/blockers': typeof AuthenticatedReportsBlockersRoute
   '/reports/member': typeof AuthenticatedReportsMemberRoute
   '/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
@@ -349,6 +357,7 @@ export interface FileRoutesByTo {
   '/events/$id': typeof AuthenticatedEventsIdRoute
   '/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/reports/blockers': typeof AuthenticatedReportsBlockersRoute
   '/reports/member': typeof AuthenticatedReportsMemberRoute
   '/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
@@ -393,6 +402,7 @@ export interface FileRoutesById {
   '/_authenticated/events/$id': typeof AuthenticatedEventsIdRoute
   '/_authenticated/fund-requests/$id': typeof AuthenticatedFundRequestsIdRoute
   '/_authenticated/meetings/$id': typeof AuthenticatedMeetingsIdRoute
+  '/_authenticated/reports/blockers': typeof AuthenticatedReportsBlockersRoute
   '/_authenticated/reports/member': typeof AuthenticatedReportsMemberRoute
   '/_authenticated/reports/workload': typeof AuthenticatedReportsWorkloadRoute
   '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
@@ -437,6 +447,7 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/fund-requests/$id'
     | '/meetings/$id'
+    | '/reports/blockers'
     | '/reports/member'
     | '/reports/workload'
     | '/settings/organization'
@@ -479,6 +490,7 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/fund-requests/$id'
     | '/meetings/$id'
+    | '/reports/blockers'
     | '/reports/member'
     | '/reports/workload'
     | '/settings/organization'
@@ -522,6 +534,7 @@ export interface FileRouteTypes {
     | '/_authenticated/events/$id'
     | '/_authenticated/fund-requests/$id'
     | '/_authenticated/meetings/$id'
+    | '/_authenticated/reports/blockers'
     | '/_authenticated/reports/member'
     | '/_authenticated/reports/workload'
     | '/_authenticated/settings/organization'
@@ -784,6 +797,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMeetingsIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports/blockers': {
+      id: '/_authenticated/reports/blockers'
+      path: '/reports/blockers'
+      fullPath: '/reports/blockers'
+      preLoaderRoute: typeof AuthenticatedReportsBlockersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/reports/member': {
       id: '/_authenticated/reports/member'
       path: '/reports/member'
@@ -861,6 +881,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedEventsIdRoute: typeof AuthenticatedEventsIdRoute
   AuthenticatedFundRequestsIdRoute: typeof AuthenticatedFundRequestsIdRoute
   AuthenticatedMeetingsIdRoute: typeof AuthenticatedMeetingsIdRoute
+  AuthenticatedReportsBlockersRoute: typeof AuthenticatedReportsBlockersRoute
   AuthenticatedReportsMemberRoute: typeof AuthenticatedReportsMemberRoute
   AuthenticatedReportsWorkloadRoute: typeof AuthenticatedReportsWorkloadRoute
   AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
@@ -899,6 +920,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedEventsIdRoute: AuthenticatedEventsIdRoute,
   AuthenticatedFundRequestsIdRoute: AuthenticatedFundRequestsIdRoute,
   AuthenticatedMeetingsIdRoute: AuthenticatedMeetingsIdRoute,
+  AuthenticatedReportsBlockersRoute: AuthenticatedReportsBlockersRoute,
   AuthenticatedReportsMemberRoute: AuthenticatedReportsMemberRoute,
   AuthenticatedReportsWorkloadRoute: AuthenticatedReportsWorkloadRoute,
   AuthenticatedSettingsOrganizationRoute:
