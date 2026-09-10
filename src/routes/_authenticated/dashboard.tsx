@@ -10,6 +10,7 @@ import { canManageCash, fetchMyBills, fetchPendingClaims } from "@/lib/cash";
 import { SupervisorOverview } from "@/components/assignments/SupervisorOverview";
 import { UrgentBanners } from "@/components/announcements/UrgentBanners";
 import { WelcomeGuideCard } from "@/components/WelcomeGuideCard";
+import { countContributionsThisWeek, countUnacknowledgedCoaching } from "@/lib/hr";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
