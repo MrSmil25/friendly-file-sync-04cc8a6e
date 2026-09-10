@@ -184,6 +184,10 @@ function WorkspacePage() {
             onMove={(id, status) => {
               const task = tasks.find((t) => t.id === id);
               if (!task || task.status === status) return;
+              if (status === "Blocked") {
+                setBlockTarget({ id, title: task.title });
+                return;
+              }
               moveMutation.mutate({ id, status });
             }}
           />
