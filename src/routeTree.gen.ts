@@ -35,6 +35,7 @@ import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authen
 import { Route as AuthenticatedPipelineRouteImport } from './routes/_authenticated/pipeline'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedTransactionsRouteImport } from './routes/_authenticated/transactions'
+import { Route as AuthenticatedWarningsRouteImport } from './routes/_authenticated/warnings'
 import { Route as AuthenticatedWorkspaceRouteImport } from './routes/_authenticated/workspace'
 import { Route as AuthenticatedAdminCategoriesRouteImport } from './routes/_authenticated/admin.categories'
 import { Route as AuthenticatedCompaniesIndexRouteImport } from './routes/_authenticated/companies.index'
@@ -194,6 +195,11 @@ const AuthenticatedTransactionsRoute =
     path: '/transactions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedWarningsRoute = AuthenticatedWarningsRouteImport.update({
+  id: '/warnings',
+  path: '/warnings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedWorkspaceRoute = AuthenticatedWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -337,6 +343,7 @@ export interface FileRoutesByFullPath {
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/transactions': typeof AuthenticatedTransactionsRoute
+  '/warnings': typeof AuthenticatedWarningsRoute
   '/workspace': typeof AuthenticatedWorkspaceRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/companies/$id': typeof AuthenticatedCompaniesIdRoute
@@ -384,6 +391,7 @@ export interface FileRoutesByTo {
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/transactions': typeof AuthenticatedTransactionsRoute
+  '/warnings': typeof AuthenticatedWarningsRoute
   '/workspace': typeof AuthenticatedWorkspaceRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/companies/$id': typeof AuthenticatedCompaniesIdRoute
@@ -433,6 +441,7 @@ export interface FileRoutesById {
   '/_authenticated/pipeline': typeof AuthenticatedPipelineRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/transactions': typeof AuthenticatedTransactionsRoute
+  '/_authenticated/warnings': typeof AuthenticatedWarningsRoute
   '/_authenticated/workspace': typeof AuthenticatedWorkspaceRoute
   '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/_authenticated/companies/$id': typeof AuthenticatedCompaniesIdRoute
@@ -482,6 +491,7 @@ export interface FileRouteTypes {
     | '/pipeline'
     | '/profile'
     | '/transactions'
+    | '/warnings'
     | '/workspace'
     | '/admin/categories'
     | '/companies/$id'
@@ -529,6 +539,7 @@ export interface FileRouteTypes {
     | '/pipeline'
     | '/profile'
     | '/transactions'
+    | '/warnings'
     | '/workspace'
     | '/admin/categories'
     | '/companies/$id'
@@ -577,6 +588,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pipeline'
     | '/_authenticated/profile'
     | '/_authenticated/transactions'
+    | '/_authenticated/warnings'
     | '/_authenticated/workspace'
     | '/_authenticated/admin/categories'
     | '/_authenticated/companies/$id'
@@ -792,6 +804,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/warnings': {
+      id: '/_authenticated/warnings'
+      path: '/warnings'
+      fullPath: '/warnings'
+      preLoaderRoute: typeof AuthenticatedWarningsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/workspace': {
       id: '/_authenticated/workspace'
       path: '/workspace'
@@ -956,6 +975,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPipelineRoute: typeof AuthenticatedPipelineRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedTransactionsRoute: typeof AuthenticatedTransactionsRoute
+  AuthenticatedWarningsRoute: typeof AuthenticatedWarningsRoute
   AuthenticatedWorkspaceRoute: typeof AuthenticatedWorkspaceRoute
   AuthenticatedAdminCategoriesRoute: typeof AuthenticatedAdminCategoriesRoute
   AuthenticatedCompaniesIdRoute: typeof AuthenticatedCompaniesIdRoute
@@ -999,6 +1019,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPipelineRoute: AuthenticatedPipelineRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedTransactionsRoute: AuthenticatedTransactionsRoute,
+  AuthenticatedWarningsRoute: AuthenticatedWarningsRoute,
   AuthenticatedWorkspaceRoute: AuthenticatedWorkspaceRoute,
   AuthenticatedAdminCategoriesRoute: AuthenticatedAdminCategoriesRoute,
   AuthenticatedCompaniesIdRoute: AuthenticatedCompaniesIdRoute,
