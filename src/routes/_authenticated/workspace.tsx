@@ -100,6 +100,25 @@ function WorkspacePage() {
     onError: (e: Error) => toast.error(e.message || "Gagal memindahkan task."),
   });
 
+  const blockMutation = useMutation({
+    mutationFn: ({
+      id,
+      blockedBy,
+      reason,
+    }: {
+      id: string;
+      blockedBy: string | null;
+      reason: string;
+    }) => setTaskBlocked(id, blockedBy, reason),
+    onSuccess: () => {
+      toast.success("Task ditandai terhambat.");
+      setBlockTarget(null);
+      queryClient.invalidateQueries({ queryKey: ["my-workspace"] });
+      queryClient.invalidateQueries({ queryKey: ["blocker-summary"] });
+    },
+    onError: (e: Error) => toast.error(e.message || "Gagal menandai task terhambat."),
+  });
+
   const createMutation = useMutation({
     mutationFn: (values: Omit<NewTaskInput, "assignee_id" | "division">) =>
       createMyTask({
