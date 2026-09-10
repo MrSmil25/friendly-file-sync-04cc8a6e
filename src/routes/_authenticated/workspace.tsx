@@ -15,6 +15,8 @@ import {
   type NewTaskInput,
   type TaskStatus,
 } from "@/lib/workspace";
+import { setTaskBlocked } from "@/lib/hr";
+import { BlockedTaskDialog } from "@/components/hr/BlockedTaskDialog";
 import { KanbanBoard } from "@/components/workspace/KanbanBoard";
 import { TaskFormDialog } from "@/components/workspace/TaskFormDialog";
 import { MyReimbursementNotice } from "@/components/fund-requests/MyReimbursementNotice";
