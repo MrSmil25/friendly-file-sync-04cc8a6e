@@ -283,6 +283,16 @@ function WorkspacePage() {
         saving={createMutation.isPending}
         onSubmit={(values) => createMutation.mutate(values)}
       />
+
+      <BlockedTaskDialog
+        open={!!blockTarget}
+        taskTitle={blockTarget?.title}
+        onOpenChange={(o) => !o && setBlockTarget(null)}
+        submitting={blockMutation.isPending}
+        onSubmit={({ blockedBy, reason }) =>
+          blockTarget && blockMutation.mutate({ id: blockTarget.id, blockedBy, reason })
+        }
+      />
     </div>
   );
 }
