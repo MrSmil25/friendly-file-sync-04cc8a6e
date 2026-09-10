@@ -67,6 +67,17 @@ function DashboardPage() {
     (b) => b.status === "Belum_Bayar" || b.status === "Ditolak",
   ).length;
 
+  const { data: unreadCoaching = 0 } = useQuery({
+    queryKey: ["coaching-unread", profile?.id],
+    queryFn: () => countUnacknowledgedCoaching(profile!.id),
+    enabled: !!profile?.id,
+  });
+  const { data: weeklyContributions = 0 } = useQuery({
+    queryKey: ["contributions-week", profile?.id],
+    queryFn: () => countContributionsThisWeek(profile!.id),
+    enabled: !!profile?.id,
+  });
+
   const activeEvents = events.filter((e) =>
     ["Planning", "Preparation", "Live"].includes(e.status ?? ""),
   );
