@@ -21,6 +21,7 @@ import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/cash'
 import { Route as AuthenticatedCoachingRouteImport } from './routes/_authenticated/coaching'
 import { Route as AuthenticatedCommandCenterRouteImport } from './routes/_authenticated/command-center'
+import { Route as AuthenticatedContributionsRouteImport } from './routes/_authenticated/contributions'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDivisionsRouteImport } from './routes/_authenticated/divisions'
 import { Route as AuthenticatedFundApprovalsRouteImport } from './routes/_authenticated/fund-approvals'
@@ -114,6 +115,12 @@ const AuthenticatedCommandCenterRoute =
   AuthenticatedCommandCenterRouteImport.update({
     id: '/command-center',
     path: '/command-center',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedContributionsRoute =
+  AuthenticatedContributionsRouteImport.update({
+    id: '/contributions',
+    path: '/contributions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -316,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/cash': typeof AuthenticatedCashRoute
   '/coaching': typeof AuthenticatedCoachingRoute
   '/command-center': typeof AuthenticatedCommandCenterRoute
+  '/contributions': typeof AuthenticatedContributionsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/divisions': typeof AuthenticatedDivisionsRoute
   '/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -362,6 +370,7 @@ export interface FileRoutesByTo {
   '/cash': typeof AuthenticatedCashRoute
   '/coaching': typeof AuthenticatedCoachingRoute
   '/command-center': typeof AuthenticatedCommandCenterRoute
+  '/contributions': typeof AuthenticatedContributionsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/divisions': typeof AuthenticatedDivisionsRoute
   '/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -410,6 +419,7 @@ export interface FileRoutesById {
   '/_authenticated/cash': typeof AuthenticatedCashRoute
   '/_authenticated/coaching': typeof AuthenticatedCoachingRoute
   '/_authenticated/command-center': typeof AuthenticatedCommandCenterRoute
+  '/_authenticated/contributions': typeof AuthenticatedContributionsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/divisions': typeof AuthenticatedDivisionsRoute
   '/_authenticated/fund-approvals': typeof AuthenticatedFundApprovalsRoute
@@ -458,6 +468,7 @@ export interface FileRouteTypes {
     | '/cash'
     | '/coaching'
     | '/command-center'
+    | '/contributions'
     | '/dashboard'
     | '/divisions'
     | '/fund-approvals'
@@ -504,6 +515,7 @@ export interface FileRouteTypes {
     | '/cash'
     | '/coaching'
     | '/command-center'
+    | '/contributions'
     | '/dashboard'
     | '/divisions'
     | '/fund-approvals'
@@ -551,6 +563,7 @@ export interface FileRouteTypes {
     | '/_authenticated/cash'
     | '/_authenticated/coaching'
     | '/_authenticated/command-center'
+    | '/_authenticated/contributions'
     | '/_authenticated/dashboard'
     | '/_authenticated/divisions'
     | '/_authenticated/fund-approvals'
@@ -679,6 +692,13 @@ declare module '@tanstack/react-router' {
       path: '/command-center'
       fullPath: '/command-center'
       preLoaderRoute: typeof AuthenticatedCommandCenterRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/contributions': {
+      id: '/_authenticated/contributions'
+      path: '/contributions'
+      fullPath: '/contributions'
+      preLoaderRoute: typeof AuthenticatedContributionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -922,6 +942,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCashRoute: typeof AuthenticatedCashRoute
   AuthenticatedCoachingRoute: typeof AuthenticatedCoachingRoute
   AuthenticatedCommandCenterRoute: typeof AuthenticatedCommandCenterRoute
+  AuthenticatedContributionsRoute: typeof AuthenticatedContributionsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDivisionsRoute: typeof AuthenticatedDivisionsRoute
   AuthenticatedFundApprovalsRoute: typeof AuthenticatedFundApprovalsRoute
@@ -964,6 +985,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCashRoute: AuthenticatedCashRoute,
   AuthenticatedCoachingRoute: AuthenticatedCoachingRoute,
   AuthenticatedCommandCenterRoute: AuthenticatedCommandCenterRoute,
+  AuthenticatedContributionsRoute: AuthenticatedContributionsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDivisionsRoute: AuthenticatedDivisionsRoute,
   AuthenticatedFundApprovalsRoute: AuthenticatedFundApprovalsRoute,

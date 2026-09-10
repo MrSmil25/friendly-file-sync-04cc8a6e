@@ -86,6 +86,17 @@ const navSections = [
     ] as const,
   },
   {
+    label: "HR & KINERJA",
+    items: [
+      { to: "/reports/member", label: "Rapor Anggota", icon: ClipboardList },
+      { to: "/reports/workload", label: "Peta Beban Kerja", icon: TrendingUp },
+      { to: "/reports/blockers", label: "Pelacak Penyumbat", icon: ShieldCheck },
+      { to: "/reports/holdings", label: "Serah Terima", icon: Boxes },
+      { to: "/coaching", label: "Catatan Bimbingan", icon: NotebookPen },
+      { to: "/contributions", label: "Feed Kontribusi", icon: Megaphone },
+    ] as const,
+  },
+  {
     label: "EKSTERNAL",
     items: [
       { to: "/companies", label: "Perusahaan", icon: Building2 },
