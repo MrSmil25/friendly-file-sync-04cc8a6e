@@ -76,6 +76,7 @@ function WorkspacePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const [showPrivate, setShowPrivate] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
+  const [blockTarget, setBlockTarget] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
